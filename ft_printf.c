@@ -1,42 +1,59 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
+
+int ft_print_args(const char *string, int i, va_list args)
+{
+  if (string[i + 1] == 'd' || string[i + 1] == 'i')
+    ft_putnbr(va_arg(args, int));
+  else if (string[i + 1] == 'c')
+    ft_putchar(va_arg(args, int));
+  else if (string[i + 1] == 's')
+    ft_putstr(va_arg(args, char *));
+  else if (string[i + 1] == '%')
+    ft_putchar('%');
+  return (0);
+}
+
+
 int	ft_printf(const char *string, ...)
 {
-  int num_args = ft_strlen(string);
-  int x, i, n;
+  int i,n;
   va_list args;
-  va_start(args, string);
   
   i = 0;
   n = 0;
-  while (i < num_args)
+  if (!string)
+		return (-1);
+  va_start(args, string);
+  while (string[i])
   {
-    if (string[i] == '%' && string[i + 1] == 'd')
+    if (string[i] == '%' && ft_strrchr("scpdiuxX%", string[i + 1]))
     {
-        n++;
-        x = va_arg(args, int);
-        ft_putnbr(x);
-        i++;
-    }
-    else
-        ft_putchar(string[i]);
+			ft_print_args(string, i, args);
+			i++;
+      //n++;
+		}
+		else
+		  ft_putchar(string[i]);
     i++;
   }
-  return (i - n);
+    
+  return (i);
 }
 
 int main(void)
 {
     int n = 4;
-    int m = 3; 
+    char l = 'c';
+    char *str = "Batata";
 
     int total, original;
 
-    total = ft_printf("O num %d é legal o %d é ok\n", n, m);
+    total = ft_printf("a str %s %%\n",str);
     ft_printf("%d\n", total);
 
-    original = printf("O num %d é legal o %d é ok\n", n, m);
+    original = printf("a str %s %%\n",str);
     printf("original: %d\n", original);  
 
     return (0);
