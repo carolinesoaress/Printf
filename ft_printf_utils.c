@@ -16,22 +16,33 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-void ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
 	unsigned int	number;  
+	int				len;
+	int				num;
 
-	number = n;  
-
-	if (n < 0)  
+	num = n;
+	number = n;
+	len = 0;
+	if (n < 0)
 	{
 		ft_putchar('-');
-		number = n * -1; 
+		number = -n;
+		num = -num;
 	}
-
 	if (number > 9) 
 		ft_putnbr(number / 10);
 
-	ft_putchar(number % 10 + '0'); 
+	ft_putchar(number % 10 + '0');
+	if(num == 0)
+		len = 1;
+	while (num > 0)
+	{
+		num /= 10;
+		len++;
+	}
+	return(len);
 }
 
 char	*ft_strrchr(const char *str, int ch)

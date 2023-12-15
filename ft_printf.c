@@ -4,15 +4,16 @@
 
 int ft_print_args(const char *string, int i, va_list args)
 {
+  int ret;
   if (string[i + 1] == 'd' || string[i + 1] == 'i')
-    ft_putnbr(va_arg(args, int));
+    ret = ft_putnbr(va_arg(args, int));
   else if (string[i + 1] == 'c')
-    ft_putchar(va_arg(args, int));
+    ret = ft_putchar(va_arg(args, int));
   else if (string[i + 1] == 's')
-    ft_putstr(va_arg(args, char *));
+    ret = ft_putstr(va_arg(args, char *));
   else if (string[i + 1] == '%')
-    ft_putchar('%');
-  return (0);
+    ret = ft_putchar('%');
+  return (ret);
 }
 
 
@@ -30,16 +31,15 @@ int	ft_printf(const char *string, ...)
   {
     if (string[i] == '%' && ft_strrchr("scpdiuxX%", string[i + 1]))
     {
-			ft_print_args(string, i, args);
+			n += ft_print_args(string, i, args);
 			i++;
-      //n++;
 		}
 		else
-		  ft_putchar(string[i]);
+		  n += ft_putchar(string[i]);
     i++;
   }
     
-  return (i);
+  return (n);
 }
 
 int main(void)
@@ -50,10 +50,10 @@ int main(void)
 
     int total, original;
 
-    total = ft_printf("a str %s %%\n",str);
-    ft_printf("%d\n", total);
+    total = ft_printf("%i\n",42);
+    ft_printf("A função ruim da Carol: %d\n", total);
 
-    original = printf("a str %s %%\n",str);
+    original = printf("%i\n",42);
     printf("original: %d\n", original);  
 
     return (0);
