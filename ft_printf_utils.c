@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/19 10:22:07 by carol             #+#    #+#             */
+/*   Updated: 2023/12/19 10:36:16 by carol            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int   ft_putchar(char c)
+int	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 	return (1);
 }
 
@@ -18,7 +30,7 @@ int	ft_strlen(const char *str)
 
 int	ft_putnbr(int n)
 {
-	unsigned int	number;  
+	unsigned int	number;
 	int				len;
 	int				num;
 
@@ -31,18 +43,11 @@ int	ft_putnbr(int n)
 		number = -n;
 		num = -num;
 	}
-	if (number > 9) 
+	if (number > 9)
 		ft_putnbr(number / 10);
-
 	ft_putchar(number % 10 + '0');
-	if(num == 0)
-		len = 1;
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return(len);
+	len = ft_numbers(num);
+	return (len);
 }
 
 char	*ft_strrchr(const char *str, int ch)
