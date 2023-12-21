@@ -6,7 +6,7 @@
 /*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:29:19 by carol             #+#    #+#             */
-/*   Updated: 2023/12/19 11:14:00 by carol            ###   ########.fr       */
+/*   Updated: 2023/12/20 14:30:34 by carol            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ int		ft_putnbr(int n);
 int		ft_putstr(char *s);
 int		ft_numbers(int num);
 int		ft_puthex(int number);
+int		ft_putbighex(int number);
 #endif

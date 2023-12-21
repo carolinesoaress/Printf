@@ -6,7 +6,7 @@
 /*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:22:54 by carol             #+#    #+#             */
-/*   Updated: 2023/12/19 11:18:05 by carol            ###   ########.fr       */
+/*   Updated: 2023/12/21 07:36:02 by carol            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	ft_print_args(const char *string, int i, va_list args)
 		ret = ft_putchar('%');
 	else if (string[i + 1] == 'x')
 		ret = ft_puthex(va_arg(args, int));
+	else if (string[i + 1] == 'X')
+		ret = ft_putbighex(va_arg(args, int));
+	//else if (string[i + 1] == 'u')
+	//else if (string[i + 1] == 'p')	
 	return (ret);
 }
 
@@ -57,11 +61,14 @@ int	ft_printf(const char *string, ...)
 
 int main()
 {
-    int number = 79849;
-    int ret;
-    ret = ft_printf("%x\n", number);
-    printf("total minha: %d\n", ret);
-    ret = printf("%x\n", number);
-    printf("total original: %d\n", ret);
-    return 0;
+	int i, ret;
+	char *str= "carol";
+	
+	i = -42;
+	ret = ft_printf("int: %i, uma string: %s, hexadecial %X, pequeno %x %%\n", i, str, i, i);
+	ft_printf("%d\n", ret);
+	ret = printf("int: %i, uma string: %s, hexadecial %X, pequeno %x %%\n", i, str, i, i);
+	printf("%d\n", ret);
+	
+	return 0;
 }
