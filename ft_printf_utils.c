@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cagoncal <cagoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:22:07 by carol             #+#    #+#             */
-/*   Updated: 2023/12/19 10:36:16 by carol            ###   ########.fr       */
+/*   Updated: 2024/01/10 18:02:36 by cagoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 int	ft_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	int	bytes;
+
+	bytes = write(1, &c, 1);
+	return (bytes);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen(const char *s)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+	count = 0;
+	while (s[count])
+		count++;
+	return (count);
 }
 
 int	ft_putnbr(int n)
@@ -37,16 +39,18 @@ int	ft_putnbr(int n)
 	num = n;
 	number = n;
 	len = 0;
+	if (n == -2147483648)
+		return (ft_putstr("-2147483648"));
 	if (n < 0)
 	{
-		ft_putchar('-');
+		len += ft_putchar('-');
 		number = -n;
 		num = -num;
 	}
 	if (number > 9)
 		ft_putnbr(number / 10);
 	ft_putchar(number % 10 + '0');
-	len = ft_numbers(num);
+	len += ft_numbers(num);
 	return (len);
 }
 
@@ -69,15 +73,12 @@ char	*ft_strrchr(const char *str, int ch)
 
 int	ft_putstr(char *s)
 {
-	int	idx;
+	int	s_len;
+	int	bytes;
 
-	idx = 0;
 	if (!s)
-	{
-		write (1, "(null)", 6);
-		return (6);
-	}
-	idx = ft_strlen(s);
-	write(1, s, idx);
-	return (idx);
+		return (write(1, "(null)", 6));
+	s_len = ft_strlen(s);
+	bytes = write(1, s, s_len);
+	return (bytes);
 }

@@ -3,68 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cagoncal <cagoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:22:54 by carol             #+#    #+#             */
-/*   Updated: 2024/01/08 13:00:33 by carol            ###   ########.fr       */
+/*   Updated: 2024/01/10 18:27:01 by cagoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int	ft_print_args(const char *string, int i, va_list args)
+int	ft_print_args(char flag, va_list ptr_arg)
 {
-	int	ret;
+	int	bytes;
 
-	if (string[i + 1] == 'd' || string[i + 1] == 'i')
-		ret = ft_putnbr(va_arg(args, int));
-	else if (string[i + 1] == 'c')
-		ret = ft_putchar(va_arg(args, int));
-	else if (string[i + 1] == 's')
-		ret = ft_putstr(va_arg(args, char *));
-	else if (string[i + 1] == '%')
-		ret = ft_putchar('%');
-	else if (string[i + 1] == 'u')
-		ret = ft_putnbase(va_arg(args, unsigned int), DECIMAL_BASE);
-	return (ret);
+	bytes = 0;
+	if (flag == 'c')
+		bytes += ft_putchar(va_arg(ptr_arg, int));
+	else if (flag == 's')
+		bytes += ft_putstr(va_arg(ptr_arg, char *));
+	else if (flag == 'x')
+		bytes += ft_putnbase(va_arg(ptr_arg, unsigned int), HEXA_LOWER_BASE);
+	else if (flag == 'X')
+		bytes += ft_putnbase(va_arg(ptr_arg, unsigned int), HEXA_UPPER_BASE);
+	else if (flag == 'u')
+		bytes += ft_putnbase(va_arg(ptr_arg, unsigned int), DECIMAL_BASE);
+	else if (flag == 'i' || flag == 'd')
+		bytes += ft_putnbr(va_arg(ptr_arg, int));
+	else if (flag == '%')
+		bytes += ft_putchar('%');
+	else if (flag == 'p')
+		bytes += ft_putptr(va_arg(ptr_arg, unsigned long), HEXA_LOWER_BASE);
+	return (bytes);
 }
 
 int	ft_printf(const char *string, ...)
 {
-	va_list		args;
+	va_list		ptr_arg;
 	int			i;
-	int			n;
+	int			bytes;
 
-	i = 0;
-	n = 0;
 	if (!string)
 		return (-1);
-	va_start(args, string);
+	va_start(ptr_arg, string);
+	i = 0;
+	bytes = 0;
 	while (string[i])
 	{
-		if (string[i] == '%' && ft_strrchr("scpdiuxX%", string[i + 1]))
-		{
-			n += ft_print_args(string, i, args);
-			i++;
-		}
+		if (string[i] == '%' && string[i + 1] != '\0')
+			bytes += ft_print_args(string[++i], ptr_arg);
 		else
-			n += ft_putchar(string[i]);
+			bytes += ft_putchar(string[i]);
 		i++;
 	}
-	va_end(args);
-	return (n);
-}
-
-int main()
-{
-	unsigned int i = 42;
-	int ret;
-	
-	ret = printf("%u\n",i);
-	printf("%d\n", ret);
-	
-	ret = ft_printf("%u\n",i);
-	ft_printf("%d\n", ret);
-	return 0;
+	va_end(ptr_arg);
+	return (bytes);
 }

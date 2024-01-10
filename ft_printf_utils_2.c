@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cagoncal <cagoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:17:25 by carol             #+#    #+#             */
-/*   Updated: 2024/01/08 13:05:41 by carol            ###   ########.fr       */
+/*   Updated: 2024/01/10 17:25:06 by cagoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int	ft_putnbase(long long n, char *base)
 	}
 	if (n >= base_size)
 		bytes += ft_putnbase((n / base_size), base);
+	bytes += ft_putchar(base[n % base_size]);
+	return (bytes);
+}
+
+int	ft_putptr(unsigned long n, char *base)
+{
+	int	bytes;
+	int	base_size;
+
+	if (n == 0)
+		return (ft_putstr("(nil)"));
+	bytes = 0;
+	base_size = ft_strlen(base);
+	if (n >= (unsigned long)base_size)
+		bytes += ft_putptr((n / base_size), base);
+	else
+		bytes += ft_putstr("0x");
 	bytes += ft_putchar(base[n % base_size]);
 	return (bytes);
 }
