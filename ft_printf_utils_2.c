@@ -6,7 +6,7 @@
 /*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:17:25 by carol             #+#    #+#             */
-/*   Updated: 2023/12/21 07:39:21 by carol            ###   ########.fr       */
+/*   Updated: 2024/01/08 13:05:41 by carol            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,76 +27,20 @@ int	ft_numbers(int num)
 	return (len);
 }
 
-int	ft_bildbuffer(char *buffer, int index, int number)
+int	ft_putnbase(long long n, char *base)
 {
-	int	modulo;
+	int	bytes;
+	int	base_size;
 
-	if (number == 0)
-		buffer[index++] = '0';
-	while (number > 0)
+	bytes = 0;
+	base_size = ft_strlen(base);
+	if (n < 0)
 	{
-		modulo = number % 16;
-		number /= 16;
-		if (modulo < 10)
-			buffer[index++] = modulo + '0';
-		else
-			buffer[index++] = 'a' + (modulo - 10);
+		bytes += ft_putchar('-');
+		n = -n;
 	}
-	return (index);
-}
-
-int	ft_puthex(int number)
-{
-	char	*buffer;
-	int		ret;
-	int		index;
-
-	ret = 0;
-	index = 0;
-	buffer = (char *)malloc(32 * sizeof(char));
-	if (!buffer)
-		return (-1);
-	index = ft_bildbuffer(buffer, index, number);
-	ret = index;
-	while (index-- > 0)
-		ft_putchar (buffer[index]);
-	free(buffer);
-	return (ret);
-}
-
-int	ft_bildbigbuffer(char *buffer, int index, int number)
-{
-	int	modulo;
-
-	if (number == 0)
-		buffer[index++] = '0';
-	while (number > 0)
-	{
-		modulo = number % 16;
-		number /= 16;
-		if (modulo < 10)
-			buffer[index++] = modulo + '0';
-		else
-			buffer[index++] = 'A' + (modulo - 10);
-	}
-	return (index);
-}
-
-int	ft_putbighex(int number)
-{
-	char	*buffer;
-	int		ret;
-	int		index;
-
-	ret = 0;
-	index = 0;
-	buffer = (char *)malloc(32 * sizeof(char));
-	if (!buffer)
-		return (-1);
-	index = ft_bildbigbuffer(buffer, index, number);
-	ret = index;
-	while (index-- > 0)
-		ft_putchar (buffer[index]);
-	free(buffer);
-	return (ret);
+	if (n >= base_size)
+		bytes += ft_putnbase((n / base_size), base);
+	bytes += ft_putchar(base[n % base_size]);
+	return (bytes);
 }

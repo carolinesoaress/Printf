@@ -6,7 +6,7 @@
 /*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:22:54 by carol             #+#    #+#             */
-/*   Updated: 2023/12/21 07:36:02 by carol            ###   ########.fr       */
+/*   Updated: 2024/01/08 13:00:33 by carol            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@ int	ft_print_args(const char *string, int i, va_list args)
 		ret = ft_putstr(va_arg(args, char *));
 	else if (string[i + 1] == '%')
 		ret = ft_putchar('%');
-	else if (string[i + 1] == 'x')
-		ret = ft_puthex(va_arg(args, int));
-	else if (string[i + 1] == 'X')
-		ret = ft_putbighex(va_arg(args, int));
-	//else if (string[i + 1] == 'u')
-	//else if (string[i + 1] == 'p')	
+	else if (string[i + 1] == 'u')
+		ret = ft_putnbase(va_arg(args, unsigned int), DECIMAL_BASE);
 	return (ret);
 }
 
@@ -54,21 +50,21 @@ int	ft_printf(const char *string, ...)
 		}
 		else
 			n += ft_putchar(string[i]);
-	i++;
+		i++;
 	}
+	va_end(args);
 	return (n);
 }
 
 int main()
 {
-	int i, ret;
-	char *str= "carol";
+	unsigned int i = 42;
+	int ret;
 	
-	i = -42;
-	ret = ft_printf("int: %i, uma string: %s, hexadecial %X, pequeno %x %%\n", i, str, i, i);
-	ft_printf("%d\n", ret);
-	ret = printf("int: %i, uma string: %s, hexadecial %X, pequeno %x %%\n", i, str, i, i);
+	ret = printf("%u\n",i);
 	printf("%d\n", ret);
 	
+	ret = ft_printf("%u\n",i);
+	ft_printf("%d\n", ret);
 	return 0;
 }
