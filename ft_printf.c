@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagoncal <cagoncal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carol <carol@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:22:54 by carol             #+#    #+#             */
-/*   Updated: 2024/01/10 18:27:01 by cagoncal         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:33:04 by carol            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_print_args(char flag, va_list ptr_arg)
 	else if (flag == 'u')
 		bytes += ft_putnbase(va_arg(ptr_arg, unsigned int), DECIMAL_BASE);
 	else if (flag == 'i' || flag == 'd')
-		bytes += ft_putnbr(va_arg(ptr_arg, int));
+		bytes += ft_putnbase(va_arg(ptr_arg, unsigned int), DECIMAL_BASE);
 	else if (flag == '%')
 		bytes += ft_putchar('%');
 	else if (flag == 'p')

@@ -1,7 +1,7 @@
 NAME 		:= libftprintf.a
 SOURCES 	:=	ft_printf.c \
 				ft_printf_utils.c \
-				ft_printf_utils_2.c \
+				
 			
 OBJECTS 		:= ${SOURCES:.c=.o}
 CC 				:= cc
