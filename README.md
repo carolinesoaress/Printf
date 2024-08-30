@@ -50,5 +50,5 @@ O projeto `ft_printf` oferece uma oportunidade valiosa para aprofundar a compree
 
 - **Flexibilidade e Utilidade:** A `ft_printf` deve manter a flexibilidade e utilidade da função original, o que demonstra a importância de criar soluções que não só funcionem corretamente, mas também sejam práticas e adaptáveis a diferentes contextos.
 
-Esse projeto não só aprofunda seu conhecimento na função `printf`, mas também oferece uma base sólida para entender como implementar funções de formatação complexas e gerenciar recursos de forma eficaz em C. A experiência adquirida ao criar a `ft_printf` é um grande passo para aprimorar habilidades em C e em programação de sistemas.
+Esse projeto não só aprofundou meu conhecimento na função `printf`, mas também ofereceu uma base sólida para entender como implementar funções de formatação complexas e gerenciar recursos de forma eficaz em C. A experiência adquirida ao criar a `ft_printf` é um grande passo para aprimorar habilidades em C e em programação de sistemas.
 
