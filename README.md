@@ -42,7 +42,7 @@ Exemplos de Uso:
 
 O projeto `ft_printf` oferece uma oportunidade valiosa para aprofundar a compreensão da função `printf` e seu comportamento detalhado. Reimplementar a `printf` da biblioteca padrão envolve:
 
-- **Compreensão Profunda de Formatadores:** A necessidade de lidar com diferentes especificadores de formato (`%c`, `%s`, `%d`, etc.) exige um entendimento detalhado de como os dados devem ser formatados e apresentados. Isso ajuda a desenvolver uma habilidade crítica na manipulação de diferentes tipos de dados e na implementação de conversões precisas.
+- **Compreensão Profunda de Formatadores:** A necessidade de lidar com diferentes especificadores de formato (`%c`, `%s`, `%d`, etc.) exige um entendimento detalhado de como os dados devem ser formatados e apresentados. Isso me ajudou a desenvolver uma habilidade crítica na manipulação de diferentes tipos de dados e na implementação de conversões precisas.
 
 - **Gerenciamento de Buffers:** Implementar o gerenciamento de buffers, apesar de ser uma diferença com a função original, reforça a importância de entender a alocação e manipulação eficiente de memória em C. Isso é crucial para otimizar o desempenho e evitar vazamentos de memória.
 
